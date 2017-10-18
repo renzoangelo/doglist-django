@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doge</title>
+</head>
+  <style>
+  html {
+    background: url(static/dog_app/bg.jpg) no-repeat center fixed;
+    background-size: cover;
+  }
+  </style>
+<body>
+<center>
+    <h1>Doggo's List</h1>
+    <hr>
+   <form action="/create" method="post">
+       {% csrf_token %}
+        <label for="name">Name: <Input type="text" name="name" id="name"/></label>
+        <label for="breed">Breed: <Input type="text" name="breed" id="breed"/></label>
+        <Input type="submit" value="Create"/>
+   </form>
+   <table border="1">
+       <thead>
+       <tr>
+           <th>Dog Name</th>
+           <th>Breed</th>
+           <th>Created at</th>
+           <th>Updated at</th>
+           <th>Actions</th>
+       </tr>
+       </thead>
+       <tbody>
+          {% for dog in dogs %}
+          <tr>
+              <td>{{dog.name}}</td>
+             <td>{{dog.breed}}</td>
+             <td>{{dog.created_at}}</td>
+             <td>{{dog.updated_at}}</td>
+             <td><a href="/edit/{{ dog.id }}">Edit</a>
+                 <a href="/delete/{{ dog.id }}">Delete</a>
+             </td>
+          </tr>
+          {% endfor %}
+       </tbody>
+   </table>
+    </center>
+</body>
+</html>
